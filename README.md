@@ -61,6 +61,7 @@ No special setup is required since SQLite is embedded. The database will be crea
 
 Use the following commands to interact with the system. **Prepend `npx ts-node src/index.ts`** to each command as shown below:
 
+```bash
 npx ts-node src/index.ts load-staff <csvFilePath>
 # Load staff mapping data from a CSV file.
 
@@ -75,6 +76,7 @@ npx ts-node src/index.ts lookup <staffPassId>
 
 npx ts-node src/index.ts drop-tables
 # Drop all tables (for testing purposes).
+```
 
 ---
 
