@@ -75,6 +75,28 @@ npx ts-node src/index.ts drop-tables
 # Drop all tables (for testing purposes).
 ```
 
+To view the database:
+
+```bash
+sqlite3 gift_redemption.db
+```
+Inside the SQLite prompt, run:
+
+```bash
+.tables
+#view all tables.
+```
+Example queries:
+
+```bash
+SELECT * FROM redemptions;
+SELECT * FROM staff_mapping;
+```
+
+Exit the SQLite prompt:
+```bash
+.exit
+```
 ---
 
 ## Testing 
