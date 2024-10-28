@@ -65,9 +65,6 @@ Use the following commands to interact with the system. **Prepend `npx ts-node s
 npx ts-node src/index.ts load-staff <csvFilePath>
 # Load staff mapping data from a CSV file.
 
-npx ts-node src/index.ts load-redemptions <csvFilePath>
-# Load redemptions data from a CSV file.
-
 npx ts-node src/index.ts redeem <teamName>
 # Redeem a gift for a team.
 
