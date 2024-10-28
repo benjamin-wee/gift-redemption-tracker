@@ -84,7 +84,7 @@ Inside the SQLite prompt, run:
 
 ```bash
 .tables
-#view all tables.
+# View all tables.
 ```
 Example queries:
 
