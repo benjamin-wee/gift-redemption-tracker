@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project implements a **Gift Redemption System** to manage the distribution of Christmas gifts by departments.
+This project implements a Command Line **Gift Redemption System** to manage the distribution of Christmas gifts by departments.
 
 ---
 
