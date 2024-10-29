@@ -75,6 +75,23 @@ npm start drop-tables
 # Drop all tables (for testing purposes).
 ```
 
+On your first run: 
+
+Please run:
+
+```bash
+npm start drop-tables
+```
+Followed by:
+
+```bash
+npm start load-staff <csvFilePath>
+```
+
+to **reset the SQLite database** to ensure correctness. 
+
+Followed by:
+
 To view the database:
 
 ```bash
