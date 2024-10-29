@@ -1,6 +1,7 @@
 import fs from 'fs';
 import csv from 'csv-parser';
 import { initDB } from '../database/init';
+import { insertStaffMapping } from '../database/operations';
 
 export async function loadStaffMapping(csvFilePath: string): Promise<string> {
     const db = initDB();
@@ -17,20 +18,9 @@ export async function loadStaffMapping(csvFilePath: string): Promise<string> {
             .on('data', (row) => {
                 const { staff_pass_id, team_name, created_at } = row;
 
-                const insertPromise = new Promise<void>((res, rej) => {
-                    db.run(
-                        'INSERT OR IGNORE INTO staff_mapping (staff_pass_id, team_name, created_at) VALUES (?, ?, ?)',
-                        [staff_pass_id, team_name, parseInt(created_at)],
-                        (err) => {
-                            if (err) {
-                                rej(new Error(`Failed to insert ${staff_pass_id}: ${err}`));
-                            } else {
-                                res();
-                            }
-                        }
-                    );
-                });
+                const parsedCreatedAt = parseInt(created_at);
 
+                const insertPromise = insertStaffMapping(db, staff_pass_id, team_name, parsedCreatedAt);
                 insertPromises.push(insertPromise);
             })
             .on('end', async () => {

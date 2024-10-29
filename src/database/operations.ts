@@ -1,5 +1,27 @@
 import { initDB } from "./init";
 import { StaffMappingRow } from "../utils/interfaces";
+import { Database } from 'sqlite3';
+
+export function insertStaffMapping(
+    db: Database,
+    staffPassId: string,
+    teamName: string,
+    createdAt: number
+): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        db.run(
+            'INSERT OR IGNORE INTO staff_mapping (staff_pass_id, team_name, created_at) VALUES (?, ?, ?)',
+            [staffPassId, teamName, createdAt],
+            (err: any) => {
+                if (err) {
+                    reject(new Error(`Failed to insert ${staffPassId}: ${err}`));
+                } else {
+                    resolve();
+                }
+            }
+        );
+    });
+}
 
 export async function dropTables(): Promise<string> {
     const db = initDB();  // Initialize the database connection
