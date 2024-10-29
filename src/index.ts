@@ -1,5 +1,5 @@
-import { loadStaffMapping } from './csv_loader';
-import { redeemGift, lookupStaffPass } from './redemption';
+import { loadStaffMapping } from './utils/csv_loader';
+import { redeemGift, lookupStaffPass } from './services/redemption';
 import { dropTables } from './database/operations';
 import { printUsage } from './utils/usage';
 

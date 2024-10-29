@@ -1,6 +1,6 @@
 import fs from 'fs';
 import csv from 'csv-parser';
-import { initDB } from './database/init';
+import { initDB } from '../database/init';
 
 // Function to populate the `staff_mapping` table without internal logging
 export async function loadStaffMapping(csvFilePath: string): Promise<string> {

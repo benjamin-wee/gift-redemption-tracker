@@ -1,5 +1,5 @@
-import { getTeamNameByStaffPass } from './database/operations';
-import { isTeamRedeemed, insertRedemption } from './database/operations';
+import { getTeamNameByStaffPass } from '../database/operations';
+import { isTeamRedeemed, insertRedemption } from '../database/operations';
 
 // Lookup staff by their staff_pass_id
 export async function lookupStaffPass(staffPassId: string): Promise<string | null> {

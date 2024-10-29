@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import { DB_PATH } from '../utils/constants';
+import { DB_PATH } from '../config/constants';
 
 // Initializes the SQLite database
 export function initDB(): sqlite3.Database {
