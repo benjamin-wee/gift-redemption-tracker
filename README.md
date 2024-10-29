@@ -59,19 +59,19 @@ No special setup is required since SQLite is embedded. The database will be crea
 
 ## Usage
 
-Use the following commands to interact with the system. **Prepend `npx ts-node src/index.ts`** to each command as shown below:
+Use the following commands to interact with the system. **Prepend `npm start`** to each command as shown below:
 
 ```bash
-npx ts-node src/index.ts load-staff <csvFilePath>
+npm start load-staff <csvFilePath>
 # Load staff mapping data from a CSV file.
 
-npx ts-node src/index.ts redeem <teamName>
+npm start redeem <teamName>
 # Redeem a gift for a team.
 
-npx ts-node src/index.ts lookup <staffPassId>
+npm start lookup <staffPassId>
 # Lookup the team for a given staff pass ID.
 
-npx ts-node src/index.ts drop-tables
+npm start drop-tables
 # Drop all tables (for testing purposes).
 ```
 
