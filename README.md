@@ -23,7 +23,7 @@ This project implements a Command Line **Gift Redemption System** to manage the 
 - **Staff ID Look-up**: Verify if a representative’s staff ID belongs to a valid team.
 - **Redemption Check**: Ensure a team has not already redeemed their gift.
 - **Redemption Record**: Record a redemption if the team is eligible, or reject the request.
-- **SQLite Database** for storing redemption data.
+- **SQLite Database** for storing redemption data and staff id to team mappings.
 - **Unit Tests** to validate the core functionalities.
 
 ---
@@ -75,6 +75,21 @@ npm start drop-tables
 # Drop all tables (for testing purposes).
 ```
 
+On your first run: 
+
+Please run:
+
+```bash
+npm start drop-tables
+```
+Followed by:
+
+```bash
+npm start load-staff <csvFilePath>
+```
+
+to **reset the SQLite database** to ensure correctness. 
+
 To view the database:
 
 ```bash
@@ -103,7 +118,7 @@ Exit the SQLite prompt:
 
 This project uses **Jest** to test the correctness of the database operations and the gift redemption logic. The test case covers the **3 core functionalities stated in the assignment (lookup, verification of redemption status, adding new redemption)**. Other functions tested are key operations, including database operations. 
 
-**Jest** was used for **mocking data** for testing, as well as **spying** to simulate certain failures
+**Jest** was used for **mocking data** for testing, as well as **spying** to simulate certain failures.
 
 Below is a guide on how to run them.
 
@@ -123,6 +138,8 @@ NODE_ENV=test npm test <PATH_TO_TEST_FILE>
 
 ## Assumptions
 
+- Staff Pass ID given **does not contain spaces.**
+- Persisted CSV data is required to **avoid repeated parsing of staff mapping CSV** to improve performance.
 - Redemption data has to be **persisted in the SQLite database** to ensure redemptions are accurately tracked.
 - **SQLite** is used for simplicity while achieving data persistence in this assignment, but it can be replaced with another database system for scalability.
   - Since this is a **read-heavy application**, and the requirements are not highly relational, **DynamoDB** was initially considered for its efficient **O(1) lookups**. However, it was ultimately not chosen to keep the setup simple and easier for interviewers to run.
