@@ -101,6 +101,24 @@ Exit the SQLite prompt:
 
 ## Testing 
 
+This project uses **Jest** to test the correctness of the database operations and the gift redemption logic. The test case covers the **3 core functionalities stated in the assignment (lookup, verification of redemption status, adding new redemption)**. Other functions tested are key operations, including database operations. 
+
+**Jest** was used for **mocking data** for testing, as well as **spying** to simulate certain failures
+
+Below is a guide on how to run them.
+
+To run all the tests:
+```bash
+NODE_ENV=test npm test   
+```
+
+To run a specific test:
+```bash
+NODE_ENV=test npm test <PATH_TO_TEST_FILE>
+# Eg. NODE_ENV=test npm test tests/insertRedemption.test.ts
+```
+
+
 ---
 
 ## Assumptions
