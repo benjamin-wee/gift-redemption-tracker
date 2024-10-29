@@ -103,7 +103,7 @@ Exit the SQLite prompt:
 
 This project uses **Jest** to test the correctness of the database operations and the gift redemption logic. The test case covers the **3 core functionalities stated in the assignment (lookup, verification of redemption status, adding new redemption)**. Other functions tested are key operations, including database operations. 
 
-**Jest** was used for **mocking data** for testing, as well as **spying** to simulate certain failures
+**Jest** was used for **mocking data** for testing, as well as **spying** to simulate certain failures.
 
 Below is a guide on how to run them.
 
@@ -123,6 +123,7 @@ NODE_ENV=test npm test <PATH_TO_TEST_FILE>
 
 ## Assumptions
 
+- Staff Pass ID given **does not contain spaces.**
 - Persisted CSV data is required to **avoid repeated parsing of staff mapping CSV** to improve performance.
 - Redemption data has to be **persisted in the SQLite database** to ensure redemptions are accurately tracked.
 - **SQLite** is used for simplicity while achieving data persistence in this assignment, but it can be replaced with another database system for scalability.
