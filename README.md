@@ -23,7 +23,7 @@ This project implements a Command Line **Gift Redemption System** to manage the 
 - **Staff ID Look-up**: Verify if a representative’s staff ID belongs to a valid team.
 - **Redemption Check**: Ensure a team has not already redeemed their gift.
 - **Redemption Record**: Record a redemption if the team is eligible, or reject the request.
-- **SQLite Database** for storing redemption data.
+- **SQLite Database** for storing redemption data and staff id to team mappings.
 - **Unit Tests** to validate the core functionalities.
 
 ---
