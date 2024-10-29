@@ -1,6 +1,7 @@
-import { loadStaffMapping } from './csv_loader';  // CSV loader functions
-import { redeemGift, lookupStaffPass } from './redemption';  // Redemption functions
-import { dropTables } from './db';  // Database utility functions
+import { loadStaffMapping } from './csv_loader';
+import { redeemGift, lookupStaffPass } from './redemption';
+import { dropTables } from './database/operations';
+import { printUsage } from './utils/usage';
 
 async function main() {
     const [command, ...args] = process.argv.slice(2);  // Get command and arguments
@@ -61,16 +62,6 @@ async function main() {
         printUsage();
         process.exit(1);
     }
-}
-
-// Helper function to print usage instructions
-function printUsage() {
-    console.log('Usage:');
-    console.log('  load-staff <csvFilePath>       Load staff mapping data from a CSV');
-    console.log('  load-redemptions <csvFilePath> Load redemptions data from a CSV');
-    console.log('  redeem <teamName>              Redeem a gift for a team');
-    console.log('  lookup <staffPassId>           Lookup the team for a staff pass ID');
-    console.log('  drop-tables                    Drop all tables (for testing purposes)');
 }
 
 // Run the main function

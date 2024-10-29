@@ -1,0 +1,1 @@
+export const DB_PATH = './gift_redemption.db';

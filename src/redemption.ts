@@ -1,5 +1,5 @@
 import { Database } from 'sqlite3';
-import { initDB } from './db';
+import { initDB } from './database/init';
 
 interface StaffMappingRow {
     team_name: string;
@@ -22,7 +22,7 @@ export async function lookupStaffPass(staffPassId: string, db: Database = initDB
     });
 }
 
-// Redeem a gift based on the `staff_pass_id`
+// Redeem a gift based on the staff pass id
 export async function redeemGift(staffPassId: string): Promise<{ success: boolean; teamName: string | null }> {
     const db = initDB();
 
