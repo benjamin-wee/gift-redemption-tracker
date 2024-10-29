@@ -13,8 +13,8 @@ async function main() {
                     throw new Error('Please provide the path to the staff mapping CSV.');
                 }
                 console.log(`Loading staff mapping data from: ${staffCsvPath}`);
-                await loadStaffMapping(staffCsvPath);
-                console.log('Staff mapping data loaded successfully.');
+                const result = await loadStaffMapping(staffCsvPath);
+                console.log(result);
                 break;
 
             case 'redeem':
@@ -47,8 +47,8 @@ async function main() {
 
             case 'drop-tables':
                 console.log('Dropping all tables...');
-                await dropTables();
-                console.log('Tables dropped successfully.');
+                const dropTableResult = await dropTables();
+                console.log(dropTableResult);
                 break;
 
             default:

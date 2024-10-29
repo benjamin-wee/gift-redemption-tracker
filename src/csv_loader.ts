@@ -2,28 +2,31 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import { initDB } from './db';
 
-// Function to populate the `staff_mapping` table
-export async function loadStaffMapping(csvFilePath: string) {
-    const db = initDB();
+// Function to populate the `staff_mapping` table without internal logging
+export async function loadStaffMapping(csvFilePath: string): Promise<string> {
+    const db = initDB()
+    return new Promise((resolve, reject) => {
+        fs.createReadStream(csvFilePath)
+            .pipe(csv())
+            .on('data', (row) => {
+                const { staff_pass_id, team_name, created_at } = row;
 
-    fs.createReadStream(csvFilePath)
-        .pipe(csv())
-        .on('data', (row) => {
-            const { staff_pass_id, team_name, created_at } = row;
-
-            db.run(
-                'INSERT OR IGNORE INTO staff_mapping (staff_pass_id, team_name, created_at) VALUES (?, ?, ?)',
-                [staff_pass_id, team_name, parseInt(created_at)],
-                (err) => {
-                    if (err) {
-                        console.error(`Failed to insert ${staff_pass_id}:`, err);
-                    } else {
-                        console.log(`Inserted ${staff_pass_id} -> ${team_name} at ${created_at}`);
+                // Insert data into the staff_mapping table
+                db.run(
+                    'INSERT OR IGNORE INTO staff_mapping (staff_pass_id, team_name, created_at) VALUES (?, ?, ?)',
+                    [staff_pass_id, team_name, parseInt(created_at)],
+                    (err) => {
+                        if (err) {
+                            reject(`Failed to insert ${staff_pass_id}: ${err.message}`);
+                        }
                     }
-                }
-            );
-        })
-        .on('end', () => {
-            console.log('staff_mapping table populated.');
-        });
+                );
+            })
+            .on('end', () => {
+                resolve('Staff mapping data loaded successfully.');
+            })
+            .on('error', (err) => {
+                reject(`Error reading CSV file: ${err.message}`);
+            });
+    });
 }
