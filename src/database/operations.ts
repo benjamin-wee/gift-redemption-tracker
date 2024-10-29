@@ -1,4 +1,5 @@
 import { initDB } from "./init";
+import { StaffMappingRow } from "../utils/interfaces";
 
 export async function dropTables(): Promise<string> {
     const db = initDB();  // Initialize the database connection
@@ -30,5 +31,58 @@ export async function dropTables(): Promise<string> {
                 }
             });
         });
+    });
+}
+
+// Query to get the team name for a given staff pass ID
+export function getTeamNameByStaffPass(staffPassId: string): Promise<string | null> {
+    const db = initDB();
+
+    return new Promise((resolve, reject) => {
+        db.get(
+            'SELECT team_name FROM staff_mapping WHERE staff_pass_id = ?',
+            [staffPassId],
+            (err, row: StaffMappingRow | undefined) => {
+                if (err) {
+                    console.error(`Error fetching team for staff_pass_id ${staffPassId}: ${err.message}`);
+                    reject(err);
+                } else {
+                    resolve(row?.team_name || null);
+                }
+            }
+        );
+    });
+}
+
+// Query to check if the team has already redeemed their gift
+export function isTeamRedeemed(teamName: string): Promise<boolean> {
+    const db = initDB();
+    return new Promise((resolve, reject) => {
+        db.get('SELECT * FROM redemptions WHERE team_name = ?', [teamName], (err, row) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(!!row);
+            }
+        });
+    });
+}
+
+// Inserts a new redemption entry for the team
+export function insertRedemption(teamName: string): Promise<void> {
+    const db = initDB();
+    const timestamp = Date.now();
+    return new Promise((resolve, reject) => {
+        db.run(
+            'INSERT INTO redemptions (team_name, redeemed_at) VALUES (?, ?)',
+            [teamName, timestamp],
+            (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            }
+        );
     });
 }
