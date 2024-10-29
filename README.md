@@ -123,6 +123,7 @@ NODE_ENV=test npm test <PATH_TO_TEST_FILE>
 
 ## Assumptions
 
+- Persisted CSV data is required to **avoid repeated parsing of staff mapping CSV** to improve performance.
 - Redemption data has to be **persisted in the SQLite database** to ensure redemptions are accurately tracked.
 - **SQLite** is used for simplicity while achieving data persistence in this assignment, but it can be replaced with another database system for scalability.
   - Since this is a **read-heavy application**, and the requirements are not highly relational, **DynamoDB** was initially considered for its efficient **O(1) lookups**. However, it was ultimately not chosen to keep the setup simple and easier for interviewers to run.
