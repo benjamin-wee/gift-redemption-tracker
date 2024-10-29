@@ -1,5 +1,5 @@
 import { getTeamNameByStaffPass } from '../database/operations';
-import { isTeamRedeemed, insertRedemption } from '../database/operations';
+import { hasTeamRedeemed, insertRedemption } from '../database/operations';
 
 // Lookup staff by their staff_pass_id
 export async function lookupStaffPass(staffPassId: string): Promise<string | null> {
@@ -22,7 +22,7 @@ export async function redeemGift(staffPassId: string): Promise<{ success: boolea
         }
 
         // Check if the team has already redeemed their gift
-        const alreadyRedeemed = await isTeamRedeemed(teamName);
+        const alreadyRedeemed = await hasTeamRedeemed(teamName);
 
         if (alreadyRedeemed) {
             return { success: false, teamName };  // Gift already redeemed

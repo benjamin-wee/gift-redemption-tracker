@@ -58,7 +58,7 @@ async function main() {
                 process.exit(1);
         }
     } catch (err: any) {
-        console.error('An error occurred:', err.message);
+        console.error('An error occurred:', err);
         printUsage();
         process.exit(1);
     }

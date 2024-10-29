@@ -65,8 +65,8 @@ Use the following commands to interact with the system. **Prepend `npm start`** 
 npm start load-staff <csvFilePath>
 # Load staff mapping data from a CSV file.
 
-npm start redeem <teamName>
-# Redeem a gift for a team.
+npm start redeem <staffPassId>
+# Redeem a gift for the team corresponding to the staff pass ID.
 
 npm start lookup <staffPassId>
 # Lookup the team for a given staff pass ID.

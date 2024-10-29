@@ -44,8 +44,7 @@ export function getTeamNameByStaffPass(staffPassId: string): Promise<string | nu
             [staffPassId],
             (err, row: StaffMappingRow | undefined) => {
                 if (err) {
-                    console.error(`Error fetching team for staff_pass_id ${staffPassId}: ${err.message}`);
-                    reject(err);
+                    reject(new Error(`Database query failed: ${err}`));
                 } else {
                     resolve(row?.team_name || null);
                 }
@@ -55,7 +54,7 @@ export function getTeamNameByStaffPass(staffPassId: string): Promise<string | nu
 }
 
 // Query to check if the team has already redeemed their gift
-export function isTeamRedeemed(teamName: string): Promise<boolean> {
+export function hasTeamRedeemed(teamName: string): Promise<boolean> {
     const db = initDB();
     return new Promise((resolve, reject) => {
         db.get('SELECT * FROM redemptions WHERE team_name = ?', [teamName], (err, row) => {

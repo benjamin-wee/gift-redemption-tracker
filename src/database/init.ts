@@ -6,7 +6,7 @@ export function initDB(): sqlite3.Database {
     // Open the SQLite database
     const db = new sqlite3.Database(DB_PATH, (err) => {
         if (err) {
-            throw new Error(`Failed to connect to database: ${err.message}`);
+            throw new Error(`Failed to connect to database`);
         }
     });
 
@@ -18,7 +18,7 @@ export function initDB(): sqlite3.Database {
                 created_at INTEGER
             )
         `, (err) => {
-            if (err) throw new Error(`Failed to create staff_mapping table: ${err.message}`);
+            if (err) throw new Error(`Failed to create staff_mapping table: ${err}`);
         });
 
         db.run(`
@@ -27,7 +27,7 @@ export function initDB(): sqlite3.Database {
                 redeemed_at INTEGER
             )
         `, (err) => {
-            if (err) throw new Error(`Failed to create redemptions table: ${err.message}`);
+            if (err) throw new Error(`Failed to create redemptions table: ${err}`);
         });
     });
 
