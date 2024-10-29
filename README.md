@@ -90,8 +90,6 @@ npm start load-staff <csvFilePath>
 
 to **reset the SQLite database** to ensure correctness. 
 
-Followed by:
-
 To view the database:
 
 ```bash
