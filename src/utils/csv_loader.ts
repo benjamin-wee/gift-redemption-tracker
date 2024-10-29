@@ -25,14 +25,17 @@ export async function loadStaffMapping(csvFilePath: string): Promise<string> {
             })
             .on('end', async () => {
                 try {
-                    await Promise.all(insertPromises); // Wait for all inserts to complete
+                    await Promise.all(insertPromises);  // Wait for all inserts to complete
+                    db.close();
                     resolve('Staff mapping data loaded successfully.');
                 } catch (error) {
+                    db.close();
                     reject(error);
                 }
             })
             .on('error', (err) => {
-                reject(new Error(`Error reading CSV file: ${err}`));
+                db.close();
+                reject(new Error(`Error reading CSV file: ${err.message}`));
             });
     });
 }

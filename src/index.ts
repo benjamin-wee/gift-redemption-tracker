@@ -2,6 +2,7 @@ import { loadStaffMapping } from './utils/csv_loader';
 import { redeemGift, lookupStaffPass } from './services/redemption';
 import { dropTables } from './database/operations';
 import { printUsage } from './utils/usage';
+import { DB_PATH } from './config/constants';
 
 async function main() {
     const [command, ...args] = process.argv.slice(2);  // Get command and arguments

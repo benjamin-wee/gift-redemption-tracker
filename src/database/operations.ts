@@ -60,25 +60,27 @@ export async function dropTables(): Promise<string> {
 export function getTeamNameByStaffPass(staffPassId: string): Promise<string | null> {
     const db = initDB();
 
-    return new Promise((resolve, reject) => {
+    return new Promise<string | null>((resolve, reject) => {
         db.get(
             'SELECT team_name FROM staff_mapping WHERE staff_pass_id = ?',
             [staffPassId],
             (err, row: StaffMappingRow | undefined) => {
                 if (err) {
-                    reject(new Error(`Database query failed: ${err}`));
+                    reject(new Error(`Database query failed: ${err.message}`));
                 } else {
-                    resolve(row?.team_name || null);
+                    resolve(row?.team_name || null); // Resolve with team_name or null
                 }
             }
         );
+    }).finally(() => {
+        db.close(); // Ensure the database connection is closed
     });
 }
 
 // Query to check if the team has already redeemed their gift
 export function hasTeamRedeemed(teamName: string): Promise<boolean> {
     const db = initDB();
-    return new Promise((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
         db.get('SELECT * FROM redemptions WHERE team_name = ?', [teamName], (err, row) => {
             if (err) {
                 reject(err);
@@ -86,6 +88,8 @@ export function hasTeamRedeemed(teamName: string): Promise<boolean> {
                 resolve(!!row);
             }
         });
+    }).finally(() => {
+        db.close(); // Close the database connection in all cases
     });
 }
 
@@ -93,17 +97,20 @@ export function hasTeamRedeemed(teamName: string): Promise<boolean> {
 export function insertRedemption(teamName: string): Promise<void> {
     const db = initDB();
     const timestamp = Date.now();
-    return new Promise((resolve, reject) => {
+
+    return new Promise<void>((resolve, reject) => {
         db.run(
             'INSERT INTO redemptions (team_name, redeemed_at) VALUES (?, ?)',
             [teamName, timestamp],
             (err) => {
                 if (err) {
-                    reject(err);
+                    reject(err);  // Reject the promise if an error occurs
                 } else {
-                    resolve();
+                    resolve();  // Resolve with no value (void)
                 }
             }
         );
+    }).finally(() => {
+        db.close();  // Ensure the database connection is closed
     });
 }
